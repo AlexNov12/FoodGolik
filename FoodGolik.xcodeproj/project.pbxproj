@@ -9,21 +9,27 @@
 /* Begin PBXBuildFile section */
 		B3720B452BC5497A0005BDF9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3720B442BC5497A0005BDF9 /* AppDelegate.swift */; };
 		B3720B472BC5497A0005BDF9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3720B462BC5497A0005BDF9 /* SceneDelegate.swift */; };
-		B3720B492BC5497A0005BDF9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3720B482BC5497A0005BDF9 /* ViewController.swift */; };
+		B3720B492BC5497A0005BDF9 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3720B482BC5497A0005BDF9 /* MainViewController.swift */; };
 		B3720B4C2BC5497A0005BDF9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3720B4A2BC5497A0005BDF9 /* Main.storyboard */; };
 		B3720B4E2BC5497C0005BDF9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B3720B4D2BC5497C0005BDF9 /* Assets.xcassets */; };
 		B3720B512BC5497C0005BDF9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3720B4F2BC5497C0005BDF9 /* LaunchScreen.storyboard */; };
+		B3720B5A2BC5C9770005BDF9 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = B3720B592BC5C9770005BDF9 /* SnapKit */; };
+		B3720B5C2BC5C9770005BDF9 /* SnapKit-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = B3720B5B2BC5C9770005BDF9 /* SnapKit-Dynamic */; };
+		B3720B5E2BC689D20005BDF9 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3720B5D2BC689D20005BDF9 /* RegisterViewController.swift */; };
+		B3720B632BC727D20005BDF9 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3720B622BC727D20005BDF9 /* LoginViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		B3720B412BC5497A0005BDF9 /* FoodGolik.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FoodGolik.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3720B442BC5497A0005BDF9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B3720B462BC5497A0005BDF9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		B3720B482BC5497A0005BDF9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		B3720B482BC5497A0005BDF9 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		B3720B4B2BC5497A0005BDF9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B3720B4D2BC5497C0005BDF9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B3720B502BC5497C0005BDF9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B3720B522BC5497C0005BDF9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B3720B5D2BC689D20005BDF9 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
+		B3720B622BC727D20005BDF9 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +37,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B3720B5A2BC5C9770005BDF9 /* SnapKit in Frameworks */,
+				B3720B5C2BC5C9770005BDF9 /* SnapKit-Dynamic in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -56,15 +64,41 @@
 		B3720B432BC5497A0005BDF9 /* FoodGolik */ = {
 			isa = PBXGroup;
 			children = (
-				B3720B442BC5497A0005BDF9 /* AppDelegate.swift */,
-				B3720B462BC5497A0005BDF9 /* SceneDelegate.swift */,
-				B3720B482BC5497A0005BDF9 /* ViewController.swift */,
-				B3720B4A2BC5497A0005BDF9 /* Main.storyboard */,
-				B3720B4D2BC5497C0005BDF9 /* Assets.xcassets */,
-				B3720B4F2BC5497C0005BDF9 /* LaunchScreen.storyboard */,
-				B3720B522BC5497C0005BDF9 /* Info.plist */,
+				B3720B612BC721650005BDF9 /* Moduls */,
+				B3720B602BC720E40005BDF9 /* Resources */,
+				B3720B5F2BC720B80005BDF9 /* Application */,
 			);
 			path = FoodGolik;
+			sourceTree = "<group>";
+		};
+		B3720B5F2BC720B80005BDF9 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				B3720B462BC5497A0005BDF9 /* SceneDelegate.swift */,
+				B3720B442BC5497A0005BDF9 /* AppDelegate.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		B3720B602BC720E40005BDF9 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				B3720B522BC5497C0005BDF9 /* Info.plist */,
+				B3720B4F2BC5497C0005BDF9 /* LaunchScreen.storyboard */,
+				B3720B4D2BC5497C0005BDF9 /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		B3720B612BC721650005BDF9 /* Moduls */ = {
+			isa = PBXGroup;
+			children = (
+				B3720B482BC5497A0005BDF9 /* MainViewController.swift */,
+				B3720B5D2BC689D20005BDF9 /* RegisterViewController.swift */,
+				B3720B622BC727D20005BDF9 /* LoginViewController.swift */,
+				B3720B4A2BC5497A0005BDF9 /* Main.storyboard */,
+			);
+			path = Moduls;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -83,6 +117,10 @@
 			dependencies = (
 			);
 			name = FoodGolik;
+			packageProductDependencies = (
+				B3720B592BC5C9770005BDF9 /* SnapKit */,
+				B3720B5B2BC5C9770005BDF9 /* SnapKit-Dynamic */,
+			);
 			productName = FoodGolik;
 			productReference = B3720B412BC5497A0005BDF9 /* FoodGolik.app */;
 			productType = "com.apple.product-type.application";
@@ -111,6 +149,9 @@
 				Base,
 			);
 			mainGroup = B3720B382BC5497A0005BDF9;
+			packageReferences = (
+				B3720B582BC5C9770005BDF9 /* XCRemoteSwiftPackageReference "SnapKit" */,
+			);
 			productRefGroup = B3720B422BC5497A0005BDF9 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -138,9 +179,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B3720B492BC5497A0005BDF9 /* ViewController.swift in Sources */,
+				B3720B492BC5497A0005BDF9 /* MainViewController.swift in Sources */,
 				B3720B452BC5497A0005BDF9 /* AppDelegate.swift in Sources */,
 				B3720B472BC5497A0005BDF9 /* SceneDelegate.swift in Sources */,
+				B3720B632BC727D20005BDF9 /* LoginViewController.swift in Sources */,
+				B3720B5E2BC689D20005BDF9 /* RegisterViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -294,7 +337,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = YMU6TYBZ5Q;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = FoodGolik/Info.plist;
+				INFOPLIST_FILE = FoodGolik/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -322,7 +365,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = YMU6TYBZ5Q;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = FoodGolik/Info.plist;
+				INFOPLIST_FILE = FoodGolik/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -363,6 +406,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		B3720B582BC5C9770005BDF9 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.7.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		B3720B592BC5C9770005BDF9 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B3720B582BC5C9770005BDF9 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+		B3720B5B2BC5C9770005BDF9 /* SnapKit-Dynamic */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B3720B582BC5C9770005BDF9 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = "SnapKit-Dynamic";
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = B3720B392BC5497A0005BDF9 /* Project object */;
 }
