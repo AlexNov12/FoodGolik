@@ -1,0 +1,6 @@
+framework module Pods_FoodGolik {
+  umbrella header "Pods-FoodGolik-umbrella.h"
+
+  export *
+  module * { export * }
+}

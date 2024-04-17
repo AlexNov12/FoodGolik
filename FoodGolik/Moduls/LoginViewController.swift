@@ -6,6 +6,10 @@
 //
 
 import UIKit
+import SnapKit
+import FirebaseCore
+import FirebaseAuth
+import FirebaseFirestore
 
 
 class LoginViewController: UIViewController {
@@ -76,13 +80,27 @@ extension LoginViewController {
         passwordTextView.font = .systemFont(ofSize: 18)
         passwordTextView.borderStyle = .roundedRect
         passwordTextView.textAlignment = .center
+        passwordTextView.isSecureTextEntry = true
         
         
         loginButton.setTitleColor(.black, for: .normal)
         loginButton.backgroundColor = .white
         loginButton.layer.cornerRadius = 16
-        loginButton.setTitle("Register", for: .normal)
-        
+        loginButton.setTitle("Login", for: .normal)
+        loginButton.addTarget(self, action: #selector(succedLogin), for: .touchUpInside)
+    }
+    
+    @objc func succedLogin() {
+        if let email = emailTextView.text, let password = passwordTextView.text {
+            Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
+                if let e = error {
+                    print(e.localizedDescription)
+                } else {
+                    let nextVC = MainViewController()
+                    self.navigationController?.pushViewController(nextVC, animated: true)
+                }
+            }
+        }
     }
 }
 

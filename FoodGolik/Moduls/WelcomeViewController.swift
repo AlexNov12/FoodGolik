@@ -63,7 +63,7 @@ extension WelcomeViewController {
 
 extension WelcomeViewController {
     func setupAppearance() {
-        view.backgroundColor = .systemMint
+        view.backgroundColor = .white
         
         mainViewLabel.textColor = .label
         mainViewLabel.font = .systemFont(ofSize: 28, weight: .semibold)
