@@ -21,6 +21,8 @@ class RegisterViewController: UIViewController {
         message: "Проверьте корректность введения логина и пароля",
         preferredStyle: .alert
     )
+    
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +33,7 @@ class RegisterViewController: UIViewController {
     }
 
 }
+
 
 // MARK: - Embed View
 
@@ -100,7 +103,8 @@ extension RegisterViewController {
         if let email = emailTextView.text, let password = passwordTextView.text {
             Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
                 if let e = error {
-                    self.registerButton.addTarget(self, action: #selector(self.showAlert), for: .touchUpInside)
+                    self.errorRegistrationAlert.message = errorHandlerForRegLogVC(e.localizedDescription)
+                    self.showRegistrationAlert()
                     print(e.localizedDescription)
                 } else {
                     let nextVC = MainViewController()
@@ -110,7 +114,7 @@ extension RegisterViewController {
         }
     }
     
-    @objc func showAlert() {
+    @objc func showRegistrationAlert() {
         present(errorRegistrationAlert, animated: true)
     }
 }

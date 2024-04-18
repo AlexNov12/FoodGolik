@@ -19,6 +19,7 @@
 		B3720B632BC727D20005BDF9 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3720B622BC727D20005BDF9 /* LoginViewController.swift */; };
 		B3720B652BC870F50005BDF9 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3720B642BC870F50005BDF9 /* MainViewController.swift */; };
 		B3720B672BCCCC230005BDF9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B3720B662BCCCC230005BDF9 /* GoogleService-Info.plist */; };
+		B3720B6A2BD058760005BDF9 /* ErrorHandlerForRegLogVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3720B692BD058760005BDF9 /* ErrorHandlerForRegLogVC.swift */; };
 		F2EF5D5E6A74C3B3A435EA0E /* Pods_FoodGolik.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9CBE6CAD0479445B071FAF8 /* Pods_FoodGolik.framework */; };
 /* End PBXBuildFile section */
 
@@ -37,6 +38,7 @@
 		B3720B622BC727D20005BDF9 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		B3720B642BC870F50005BDF9 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		B3720B662BCCCC230005BDF9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		B3720B692BD058760005BDF9 /* ErrorHandlerForRegLogVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorHandlerForRegLogVC.swift; sourceTree = "<group>"; };
 		B9CBE6CAD0479445B071FAF8 /* Pods_FoodGolik.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FoodGolik.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -83,6 +85,7 @@
 		B3720B432BC5497A0005BDF9 /* FoodGolik */ = {
 			isa = PBXGroup;
 			children = (
+				B3720B682BD058220005BDF9 /* Constants */,
 				B3720B612BC721650005BDF9 /* Moduls */,
 				B3720B602BC720E40005BDF9 /* Resources */,
 				B3720B5F2BC720B80005BDF9 /* Application */,
@@ -120,6 +123,14 @@
 				B3720B4A2BC5497A0005BDF9 /* Main.storyboard */,
 			);
 			path = Moduls;
+			sourceTree = "<group>";
+		};
+		B3720B682BD058220005BDF9 /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				B3720B692BD058760005BDF9 /* ErrorHandlerForRegLogVC.swift */,
+			);
+			path = Constants;
 			sourceTree = "<group>";
 		};
 		C4961D8A7D51FA2E1FE64904 /* Pods */ = {
@@ -255,6 +266,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B3720B492BC5497A0005BDF9 /* WelcomeViewController.swift in Sources */,
+				B3720B6A2BD058760005BDF9 /* ErrorHandlerForRegLogVC.swift in Sources */,
 				B3720B452BC5497A0005BDF9 /* AppDelegate.swift in Sources */,
 				B3720B472BC5497A0005BDF9 /* SceneDelegate.swift in Sources */,
 				B3720B652BC870F50005BDF9 /* MainViewController.swift in Sources */,

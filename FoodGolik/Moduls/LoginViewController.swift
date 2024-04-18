@@ -17,6 +17,11 @@ class LoginViewController: UIViewController {
     private let emailTextView = UITextField()
     private let passwordTextView = UITextField()
     private let loginButton = UIButton()
+    private let errorLoginAlert = UIAlertController(
+        title: "Ошибка",
+        message: "Проверьте корректность введения логина и пароля",
+        preferredStyle: .alert
+    )
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -88,12 +93,16 @@ extension LoginViewController {
         loginButton.layer.cornerRadius = 16
         loginButton.setTitle("Login", for: .normal)
         loginButton.addTarget(self, action: #selector(succedLogin), for: .touchUpInside)
+        
+        errorLoginAlert.addAction(UIAlertAction(title: "Ок", style: .cancel))
     }
     
     @objc func succedLogin() {
         if let email = emailTextView.text, let password = passwordTextView.text {
             Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
                 if let e = error {
+                    //self.showLoginAlert.message = errorHandlerForRegLogVC(e.localizedDescription)
+                    self.showLoginAlert()
                     print(e.localizedDescription)
                 } else {
                     let nextVC = MainViewController()
@@ -101,6 +110,10 @@ extension LoginViewController {
                 }
             }
         }
+    }
+    
+    @objc func showLoginAlert() {
+        present(errorLoginAlert, animated: true)
     }
 }
 
