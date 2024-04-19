@@ -9,10 +9,7 @@ import UIKit
 
 class MainViewController: UIViewController {
     
-    private let titleLabel = UILabel()
-    private let ingredientsTextView = UITextView()
-    private let checkButton = UIButton()
-    
+    private let weatherView = UIView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,9 +26,8 @@ class MainViewController: UIViewController {
 
 extension MainViewController {
     func embedView() {
-        view.addSubview(titleLabel)
-        view.addSubview(ingredientsTextView)
-        view.addSubview(checkButton)
+        view.addSubview(weatherView)
+
     }
 }
 
@@ -41,24 +37,12 @@ extension MainViewController {
     func setupLayout() {
         view.backgroundColor = .systemGray5
         
-        titleLabel.snp.makeConstraints { make in
+        weatherView.snp.makeConstraints { make in
             make.top.equalTo(view.snp_topMargin).offset(50)
             make.leading.equalTo(view.snp_leadingMargin).offset(16)
             make.trailing.equalTo(view.snp_trailingMargin).offset(-16)
-        }
-        
-        ingredientsTextView.snp.makeConstraints{ make in
-            make.top.equalTo(titleLabel.snp_bottomMargin).offset(30)
-            make.leading.equalTo(view.snp_leadingMargin).offset(16)
-            make.trailing.equalTo(view.snp_trailingMargin).offset(-16)
-            make.height.equalTo(500)
-        }
-        
-        checkButton.snp.makeConstraints { make in
-            make.top.equalTo(ingredientsTextView.snp_bottomMargin).offset(50)
-            make.leading.equalTo(view.snp_leadingMargin).offset(16)
-            make.trailing.equalTo(view.snp_trailingMargin).offset(-16)
-            make.height.equalTo(50)
+            make.height.equalTo(150)
+            make.width.equalTo(150)
         }
         
     }
@@ -68,18 +52,9 @@ extension MainViewController {
 
 extension MainViewController {
     func setupAppearance() {
-        titleLabel.textAlignment = .center
-        titleLabel.font = .systemFont(ofSize: 20)
-        titleLabel.textColor = .black
-        
-        ingredientsTextView.text = "Введите список ингридиентов, разделенных запятой"
-        ingredientsTextView.textColor = .systemGray
-        ingredientsTextView.font = .systemFont(ofSize: 18)
-        
-        checkButton.setTitleColor(.black, for: .normal)
-        checkButton.backgroundColor = .white
-        checkButton.layer.cornerRadius = 16
-        checkButton.setTitle("Поиск", for: .normal)
+        weatherView.backgroundColor = .brown
+        weatherView.layer.cornerRadius = 10
+
     }
 }
 
@@ -88,12 +63,10 @@ extension MainViewController {
 
 extension MainViewController {
     func setupData() {
-        titleLabel.text = "Анализ состава продукта"
-//        mainViewLoginButton.setTitle("Log In", for: .normal)
-//        mainViewRegisterButton.setTitle("Register", for: .normal)
+
     }
 }
 
-//#Preview(traits: .portrait) {
-//    MainViewController()
-//}
+#Preview(traits: .portrait) {
+    MainViewController()
+}
