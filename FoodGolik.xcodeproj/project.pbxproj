@@ -116,9 +116,8 @@
 		B3720B612BC721650005BDF9 /* Moduls */ = {
 			isa = PBXGroup;
 			children = (
-				B3720B482BC5497A0005BDF9 /* WelcomeViewController.swift */,
-				B3720B5D2BC689D20005BDF9 /* RegisterViewController.swift */,
-				B3720B622BC727D20005BDF9 /* LoginViewController.swift */,
+				B3720B6C2BD2FEBD0005BDF9 /* WeatherView */,
+				B3720B6B2BD2FE8F0005BDF9 /* Welcome */,
 				B3720B642BC870F50005BDF9 /* MainViewController.swift */,
 				B3720B4A2BC5497A0005BDF9 /* Main.storyboard */,
 			);
@@ -131,6 +130,23 @@
 				B3720B692BD058760005BDF9 /* ErrorHandlerForRegLogVC.swift */,
 			);
 			path = Constants;
+			sourceTree = "<group>";
+		};
+		B3720B6B2BD2FE8F0005BDF9 /* Welcome */ = {
+			isa = PBXGroup;
+			children = (
+				B3720B482BC5497A0005BDF9 /* WelcomeViewController.swift */,
+				B3720B5D2BC689D20005BDF9 /* RegisterViewController.swift */,
+				B3720B622BC727D20005BDF9 /* LoginViewController.swift */,
+			);
+			path = Welcome;
+			sourceTree = "<group>";
+		};
+		B3720B6C2BD2FEBD0005BDF9 /* WeatherView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = WeatherView;
 			sourceTree = "<group>";
 		};
 		C4961D8A7D51FA2E1FE64904 /* Pods */ = {
