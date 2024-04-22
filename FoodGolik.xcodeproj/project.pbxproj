@@ -15,8 +15,6 @@
 		B3720B512BC5497C0005BDF9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3720B4F2BC5497C0005BDF9 /* LaunchScreen.storyboard */; };
 		B3720B5A2BC5C9770005BDF9 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = B3720B592BC5C9770005BDF9 /* SnapKit */; };
 		B3720B5C2BC5C9770005BDF9 /* SnapKit-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = B3720B5B2BC5C9770005BDF9 /* SnapKit-Dynamic */; };
-		B3720B5E2BC689D20005BDF9 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3720B5D2BC689D20005BDF9 /* RegisterViewController.swift */; };
-		B3720B632BC727D20005BDF9 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3720B622BC727D20005BDF9 /* LoginViewController.swift */; };
 		B3720B652BC870F50005BDF9 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3720B642BC870F50005BDF9 /* MainViewController.swift */; };
 		B3720B672BCCCC230005BDF9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B3720B662BCCCC230005BDF9 /* GoogleService-Info.plist */; };
 		B3720B6A2BD058760005BDF9 /* ErrorHandlerForRegLogVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3720B692BD058760005BDF9 /* ErrorHandlerForRegLogVC.swift */; };
@@ -34,8 +32,6 @@
 		B3720B4D2BC5497C0005BDF9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B3720B502BC5497C0005BDF9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B3720B522BC5497C0005BDF9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B3720B5D2BC689D20005BDF9 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
-		B3720B622BC727D20005BDF9 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		B3720B642BC870F50005BDF9 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		B3720B662BCCCC230005BDF9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B3720B692BD058760005BDF9 /* ErrorHandlerForRegLogVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorHandlerForRegLogVC.swift; sourceTree = "<group>"; };
@@ -116,10 +112,10 @@
 		B3720B612BC721650005BDF9 /* Moduls */ = {
 			isa = PBXGroup;
 			children = (
-				B3720B6C2BD2FEBD0005BDF9 /* WeatherView */,
-				B3720B6B2BD2FE8F0005BDF9 /* Welcome */,
+				B3720B482BC5497A0005BDF9 /* WelcomeViewController.swift */,
 				B3720B642BC870F50005BDF9 /* MainViewController.swift */,
 				B3720B4A2BC5497A0005BDF9 /* Main.storyboard */,
+				B3720B6C2BD2FEBD0005BDF9 /* WeatherView */,
 			);
 			path = Moduls;
 			sourceTree = "<group>";
@@ -130,16 +126,6 @@
 				B3720B692BD058760005BDF9 /* ErrorHandlerForRegLogVC.swift */,
 			);
 			path = Constants;
-			sourceTree = "<group>";
-		};
-		B3720B6B2BD2FE8F0005BDF9 /* Welcome */ = {
-			isa = PBXGroup;
-			children = (
-				B3720B482BC5497A0005BDF9 /* WelcomeViewController.swift */,
-				B3720B5D2BC689D20005BDF9 /* RegisterViewController.swift */,
-				B3720B622BC727D20005BDF9 /* LoginViewController.swift */,
-			);
-			path = Welcome;
 			sourceTree = "<group>";
 		};
 		B3720B6C2BD2FEBD0005BDF9 /* WeatherView */ = {
@@ -286,8 +272,6 @@
 				B3720B452BC5497A0005BDF9 /* AppDelegate.swift in Sources */,
 				B3720B472BC5497A0005BDF9 /* SceneDelegate.swift in Sources */,
 				B3720B652BC870F50005BDF9 /* MainViewController.swift in Sources */,
-				B3720B632BC727D20005BDF9 /* LoginViewController.swift in Sources */,
-				B3720B5E2BC689D20005BDF9 /* RegisterViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

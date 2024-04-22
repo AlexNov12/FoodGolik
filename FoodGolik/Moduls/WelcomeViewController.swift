@@ -126,11 +126,6 @@ extension WelcomeViewController {
         
         errorAlert.addAction(UIAlertAction(title: "Ок", style: .cancel))
     }
-    
-    @objc func goToLoginView() {
-        let secondVC = LoginViewController()
-        navigationController?.pushViewController(secondVC, animated: true)
-    }
 }
 
 // MARK: - Setup Data

@@ -9,9 +9,6 @@ import UIKit
 import SnapKit
 
 class MainViewController: UIViewController {
-    
-    private let weatherView = UIView()
-    private let anotherView = UIView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,6 +17,7 @@ class MainViewController: UIViewController {
         setupLayout()
         setupAppearance()
         setupData()
+        self.navigationItem.hidesBackButton = true
     }
 
 }
@@ -28,8 +26,7 @@ class MainViewController: UIViewController {
 
 extension MainViewController {
     func embedView() {
-        view.addSubview(weatherView)
-        view.addSubview(anotherView)
+        navigationItem.rightBarButtonItem = makeRightBarButtonItems()
 
     }
 }
@@ -39,23 +36,7 @@ extension MainViewController {
 extension MainViewController {
     func setupLayout() {
         view.backgroundColor = .systemGray5
-        
-        weatherView.snp.makeConstraints { make in
-            make.top.equalTo(view.snp_topMargin).offset(50)
-            make.trailing.equalTo(view.snp_trailingMargin).offset(-16)
-            make.height.equalTo(150)
-            make.width.equalTo(150)
-            
-        }
-        
-        anotherView.snp.makeConstraints { make in
-            make.top.equalTo(view.snp_topMargin).offset(50)
-            make.leading.equalTo(view.snp_leadingMargin).offset(16)
-            make.height.equalTo(150)
-            make.width.equalTo(150)
-            
-        }
-        
+        navigationController?.navigationBar.tintColor = .black
     }
 }
 
@@ -63,11 +44,6 @@ extension MainViewController {
 
 extension MainViewController {
     func setupAppearance() {
-        weatherView.backgroundColor = .systemMint
-        weatherView.layer.cornerRadius = 10
-        
-        anotherView.backgroundColor = .systemGray
-        anotherView.layer.cornerRadius = 10
 
     }
 }
@@ -81,6 +57,21 @@ extension MainViewController {
     }
 }
 
-#Preview(traits: .portrait) {
-    MainViewController()
+
+// MARK: - Right Bar Buttons
+
+extension MainViewController {
+    func makeRightBarButtonItems() -> UIBarButtonItem{
+        let settingsBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "gearshape.fill"), style: .plain, target: self, action: #selector(didTapSettingItem))
+        return settingsBarButtonItem
+    }
+    
+    @objc func didTapSettingItem() {
+        print("First")
+    }
 }
+
+
+//#Preview(traits: .portrait) {
+//    MainViewController()
+//}
