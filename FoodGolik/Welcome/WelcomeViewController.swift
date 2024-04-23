@@ -57,7 +57,7 @@ extension WelcomeViewController {
 extension WelcomeViewController {
     func setupLayout() {
         mainViewLabel.snp.makeConstraints { make in
-            make.top.equalTo(view.snp_topMargin).offset(120)
+            make.top.equalTo(view.snp.top).offset(120)
             make.leading.equalTo(view.snp_leadingMargin).offset(16)
             make.trailing.equalTo(view.snp_trailingMargin).offset(-16)
             
@@ -112,12 +112,14 @@ extension WelcomeViewController {
         
         
         emailTextField.placeholder = "Электронная почта"
+        emailTextField.text = "1@2.com"
         emailTextField.textColor = .black
         emailTextField.font = .systemFont(ofSize: 18)
         emailTextField.borderStyle = .roundedRect
         emailTextField.textAlignment = .center
         
         passwordTextField.placeholder = "Пароль"
+        passwordTextField.text = "123456"
         passwordTextField.textColor = .black
         passwordTextField.font = .systemFont(ofSize: 18)
         passwordTextField.borderStyle = .roundedRect
@@ -162,7 +164,7 @@ extension WelcomeViewController {
                     self.showRegistrationAlert()
                     print(e.localizedDescription)
                 } else {
-                    let nextVC = MainViewController()
+                    let nextVC = TabBarController()
                     self.navigationController?.pushViewController(nextVC, animated: true)
                 }
             }
@@ -180,7 +182,7 @@ extension WelcomeViewController {
                     self.showLoginAlert()
                     print(e.localizedDescription)
                 } else {
-                    let nextVC = MainViewController()
+                    let nextVC = TabBarController()
                     self.navigationController?.pushViewController(nextVC, animated: true)
                 }
             }
