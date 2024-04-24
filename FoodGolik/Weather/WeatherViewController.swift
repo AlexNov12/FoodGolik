@@ -27,15 +27,7 @@ class WeatherViewController: UIViewController {
         embedViews()
         setupLayouts()
         setupAppearance()
-//        setupData()
-        
-        
-        let backgroundImage = UIImageView(frame: UIScreen.main.bounds)
-        backgroundImage.image = UIImage(named: "light_background")
-        backgroundImage.contentMode = .scaleAspectFill
-        self.view.addSubview(backgroundImage)
-        self.view.sendSubviewToBack(backgroundImage)
-        
+        setupData()
     }
 }
 
@@ -90,7 +82,34 @@ extension WeatherViewController {
             make.trailing.equalTo(view.safeAreaLayoutGuide.snp.trailing).offset(-10)
             make.height.equalTo(120)
             make.width.equalTo(120)
-            
+        }
+        
+        celsiusLabel.snp.makeConstraints{ make in
+            make.top.equalTo(weatherImage.snp.bottom).offset(20)
+            make.trailing.equalTo(view.safeAreaLayoutGuide.snp.trailing).offset(-20)
+            make.height.equalTo(120)
+            make.width.equalTo(67)
+        }
+        
+        degreesLabel.snp.makeConstraints{ make in
+            make.top.equalTo(weatherImage.snp.bottom).offset(0)
+            make.trailing.equalTo(celsiusLabel.snp.leading).offset(30)
+            make.height.equalTo(120)
+            make.width.equalTo(50)
+        }
+        
+        temperatureLabel.snp.makeConstraints{ make in
+            make.top.equalTo(weatherImage.snp.bottom).offset(20)
+            make.trailing.equalTo(degreesLabel.snp.leading).offset(50)
+            make.height.equalTo(120)
+            make.width.equalTo(150)
+        }
+        
+        currentCityLabel.snp.makeConstraints{ make in
+            make.top.equalTo(celsiusLabel.snp.bottom).offset(20)
+            make.trailing.equalTo(view.safeAreaLayoutGuide.snp.trailing).offset(150)
+            make.height.equalTo(20)
+            make.width.equalTo(250)
         }
     }
 }
@@ -98,6 +117,13 @@ extension WeatherViewController {
 // MARK: - Setup Layouts
 extension WeatherViewController {
     func setupAppearance() {
+        
+        let backgroundImage = UIImageView(frame: UIScreen.main.bounds)
+        backgroundImage.image = UIImage(named: "light_background")
+        backgroundImage.contentMode = .scaleAspectFill
+        self.view.addSubview(backgroundImage)
+        self.view.sendSubviewToBack(backgroundImage)
+        
         currentGeopositionButton.setTitleColor(.white, for: .normal)
         currentGeopositionButton.setBackgroundImage(UIImage(systemName: "paperplane.circle.fill"), for: .normal)
         currentGeopositionButton.tintColor = UIColor.black
@@ -119,6 +145,18 @@ extension WeatherViewController {
         weatherImage.image = UIImage(systemName: "cloud.hail")
         weatherImage.contentMode = .scaleAspectFit
         weatherImage.tintColor = UIColor.black
+        
+        celsiusLabel.textColor = .label
+        celsiusLabel.font = .systemFont(ofSize: 100, weight: .light)
+        
+        degreesLabel.textColor = .label
+        degreesLabel.font = .systemFont(ofSize: 75, weight: .light)
+        
+        temperatureLabel.textColor = .label
+        temperatureLabel.font = .systemFont(ofSize: 80, weight: .black)
+        
+        currentCityLabel.textColor = .label
+        currentCityLabel.font = .systemFont(ofSize: 30, weight: .regular)
     }
 }
 
@@ -126,6 +164,10 @@ extension WeatherViewController {
 // MARK: - Setup Data
 extension WeatherViewController{
     func setupData() {
-        cityForFindingTextField.placeholder = " Search"
+        cityForFindingTextField.placeholder = "Search"
+        celsiusLabel.text = "C"
+        degreesLabel.text = "°"
+        temperatureLabel.text = "21"
+        currentCityLabel.text = "Silifke"
     }
 }
