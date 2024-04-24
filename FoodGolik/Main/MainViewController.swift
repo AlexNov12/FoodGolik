@@ -12,9 +12,22 @@ class TabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.hidesBackButton = true
-        tabBar.barTintColor = UIColor.systemBlue
-        tabBar.tintColor = UIColor.green
-        tabBar.isTranslucent = false
+        // Создаем внешний вид для таб бара
+        let appearance = UITabBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        appearance.backgroundColor = UIColor(red: 237/255, green: 237/255, blue: 237/255, alpha: 1)
+        
+        // Можно задать любой UIColor
+        
+        // Если вы хотите использовать изображение в качестве фона:
+        // appearance.backgroundImage = UIImage(named: "your_image_name")
+        
+        // Применяем созданный внешний вид к текущему таб бару
+        tabBar.standardAppearance = appearance
+        if #available(iOS 15.0, *) {
+            tabBar.scrollEdgeAppearance = appearance
+        }
+        
         
         
         let profileVC = ProfileViewController()

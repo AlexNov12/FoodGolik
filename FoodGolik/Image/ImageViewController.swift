@@ -24,7 +24,11 @@ class ImageViewController: UIViewController {
         setupAppearance()
         setupData()
     }
-    
+}
+
+// MARK: - Embed Views
+
+extension ImageViewController {
     func embedViews() {
         view.addSubview(alertView)
         alertView.addSubview(alertLabel)
@@ -33,7 +37,11 @@ class ImageViewController: UIViewController {
         alertView.addSubview(alertSecondaryButton)
         
     }
-    
+}
+
+// MARK: - Setup Layouts
+
+extension ImageViewController {
     func setupLayout() {
         alertView.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(100)
@@ -68,7 +76,11 @@ class ImageViewController: UIViewController {
             make.bottom.equalTo(alertView.snp.bottom).offset(-16)
         }
     }
-    
+}
+
+// MARK: - Setup Appearance
+
+extension ImageViewController {
     func setupAppearance() {
         view.backgroundColor = .blue
         
@@ -91,7 +103,10 @@ class ImageViewController: UIViewController {
         alertSecondaryButton.setTitleColor(.blue, for: .normal)
         
     }
-    
+}
+// MARK: - Setup Data
+
+extension ImageViewController {
     func setupData() {
         alertLabel.text = "Contratulations!"
         
@@ -101,6 +116,4 @@ class ImageViewController: UIViewController {
         
         alertSecondaryButton.setTitle("Secondary action", for: .normal)
     }
-
 }
-
