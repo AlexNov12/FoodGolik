@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 class WeatherViewController: UIViewController {
     
@@ -20,6 +21,9 @@ class WeatherViewController: UIViewController {
     private let celsiusLabel = UILabel()
     private let currentCityLabel = UILabel()
     
+    var weatherManager = WeatherManager()
+    let locationManager = CLLocationManager()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +32,12 @@ class WeatherViewController: UIViewController {
         setupLayouts()
         setupAppearance()
         setupData()
+        
+        locationManager.delegate = self
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.requestLocation()
+        cityForFindingTextField.delegate = self
+        weatherManager.delegate = self
     }
 }
 
@@ -100,16 +110,16 @@ extension WeatherViewController {
         
         temperatureLabel.snp.makeConstraints{ make in
             make.top.equalTo(weatherImage.snp.bottom).offset(20)
-            make.trailing.equalTo(degreesLabel.snp.leading).offset(50)
+            make.trailing.equalTo(degreesLabel.snp.leading).offset(0)
             make.height.equalTo(120)
-            make.width.equalTo(150)
+            make.width.equalTo(250)
         }
         
         currentCityLabel.snp.makeConstraints{ make in
             make.top.equalTo(celsiusLabel.snp.bottom).offset(20)
-            make.trailing.equalTo(view.safeAreaLayoutGuide.snp.trailing).offset(150)
-            make.height.equalTo(20)
-            make.width.equalTo(250)
+            make.trailing.equalTo(view.safeAreaLayoutGuide.snp.trailing).offset(-20)
+            make.height.equalTo(40)
+            make.width.equalTo(300)
         }
     }
 }
@@ -128,7 +138,7 @@ extension WeatherViewController {
         currentGeopositionButton.setBackgroundImage(UIImage(systemName: "paperplane.circle.fill"), for: .normal)
         currentGeopositionButton.tintColor = UIColor.black
         currentGeopositionButton.layer.cornerRadius = 16
-        //currentGeopositionButton.addTarget(self, action: #selector(succedLogin), for: .touchUpInside)
+        currentGeopositionButton.addTarget(self, action: #selector(requestLocation), for: .touchUpInside)
         
         cityForFindingTextField.textColor = .black
         cityForFindingTextField.font = .systemFont(ofSize: 25)
@@ -140,7 +150,7 @@ extension WeatherViewController {
         findWeatherButton.setBackgroundImage(UIImage(systemName: "magnifyingglass"), for: .normal)
         findWeatherButton.tintColor = UIColor.black
         findWeatherButton.layer.cornerRadius = 16
-        //findWeatherButton.addTarget(self, action: #selector(succedLogin), for: .touchUpInside)
+        findWeatherButton.addTarget(self, action: #selector(searchLocation), for: .touchUpInside)
         
         weatherImage.image = UIImage(systemName: "cloud.hail")
         weatherImage.contentMode = .scaleAspectFit
@@ -153,10 +163,20 @@ extension WeatherViewController {
         degreesLabel.font = .systemFont(ofSize: 75, weight: .light)
         
         temperatureLabel.textColor = .label
+        temperatureLabel.textAlignment = .right
         temperatureLabel.font = .systemFont(ofSize: 80, weight: .black)
         
         currentCityLabel.textColor = .label
         currentCityLabel.font = .systemFont(ofSize: 30, weight: .regular)
+        currentCityLabel.textAlignment = .right
+    }
+    
+    @objc func requestLocation() {
+        locationManager.requestLocation()
+    }
+    
+    @objc func searchLocation() {
+        cityForFindingTextField.endEditing(true)
     }
 }
 
@@ -169,5 +189,64 @@ extension WeatherViewController{
         degreesLabel.text = "°"
         temperatureLabel.text = "21"
         currentCityLabel.text = "Silifke"
+    }
+}
+
+// MARK: - WeatherViewController TextFieldDelegate
+extension WeatherViewController: UITextFieldDelegate{
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        cityForFindingTextField.endEditing(true)
+        print(cityForFindingTextField.text!)
+        return true
+    }
+    
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        if textField.text != "" {
+            return true
+        } else {
+            textField.placeholder = "Type something"
+            return false
+        }
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if let city = cityForFindingTextField.text {
+            weatherManager.fetchWeather(cityName: city)
+        }
+        cityForFindingTextField.text = ""
+    }
+}
+
+
+//MARK: - WeatherManagerDelegate
+extension WeatherViewController: WeatherManagerDelegate{
+    func didUpdateWeather(_ weatherManager:WeatherManager , weather:WeatherModel){
+        // DispatchQueue для выполнения после получения запроса из API
+        DispatchQueue.main.async {
+            self.temperatureLabel.text = weather.temperatureString
+            self.weatherImage.image = UIImage(systemName:  weather.conditionName)
+            self.currentCityLabel.text = weather.cityName
+        }
+    }
+    
+    func didFailWithError(error: Error) {
+        print(error)
+    }
+}
+
+//MARK: - CLLocationManagerDelegate
+
+extension WeatherViewController: CLLocationManagerDelegate{
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let location = locations.last{
+            locationManager.stopUpdatingLocation()
+            let lat = location.coordinate.latitude
+            let lon = location.coordinate.longitude
+            weatherManager.fetchWeather(latitude: lat, longitude: lon)
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print(error)
     }
 }

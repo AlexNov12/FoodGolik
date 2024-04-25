@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B367122C2BD98E7F0013A2EE /* WeatherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B367122B2BD98E7F0013A2EE /* WeatherModel.swift */; };
+		B367122E2BD98EA20013A2EE /* WeatherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B367122D2BD98EA20013A2EE /* WeatherData.swift */; };
+		B36712302BD98EBC0013A2EE /* WeatherManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B367122F2BD98EBC0013A2EE /* WeatherManager.swift */; };
 		B3720B452BC5497A0005BDF9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3720B442BC5497A0005BDF9 /* AppDelegate.swift */; };
 		B3720B472BC5497A0005BDF9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3720B462BC5497A0005BDF9 /* SceneDelegate.swift */; };
 		B3720B492BC5497A0005BDF9 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3720B482BC5497A0005BDF9 /* WelcomeViewController.swift */; };
@@ -27,6 +30,9 @@
 /* Begin PBXFileReference section */
 		2065B4B5F8032C9BD887B6F6 /* Pods-FoodGolik.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoodGolik.release.xcconfig"; path = "Target Support Files/Pods-FoodGolik/Pods-FoodGolik.release.xcconfig"; sourceTree = "<group>"; };
 		2DE4B452EFA57A117F7CE7E4 /* Pods-FoodGolik.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoodGolik.debug.xcconfig"; path = "Target Support Files/Pods-FoodGolik/Pods-FoodGolik.debug.xcconfig"; sourceTree = "<group>"; };
+		B367122B2BD98E7F0013A2EE /* WeatherModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherModel.swift; sourceTree = "<group>"; };
+		B367122D2BD98EA20013A2EE /* WeatherData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherData.swift; sourceTree = "<group>"; };
+		B367122F2BD98EBC0013A2EE /* WeatherManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherManager.swift; sourceTree = "<group>"; };
 		B3720B412BC5497A0005BDF9 /* FoodGolik.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FoodGolik.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3720B442BC5497A0005BDF9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B3720B462BC5497A0005BDF9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -133,6 +139,9 @@
 			isa = PBXGroup;
 			children = (
 				B3720B6D2BD6EA2F0005BDF9 /* WeatherViewController.swift */,
+				B367122B2BD98E7F0013A2EE /* WeatherModel.swift */,
+				B367122D2BD98EA20013A2EE /* WeatherData.swift */,
+				B367122F2BD98EBC0013A2EE /* WeatherManager.swift */,
 			);
 			path = Weather;
 			sourceTree = "<group>";
@@ -319,12 +328,15 @@
 				B3720B6E2BD6EA2F0005BDF9 /* WeatherViewController.swift in Sources */,
 				B3720B6A2BD058760005BDF9 /* ErrorHandlerForRegLogVC.swift in Sources */,
 				B3720B762BD6F00C0005BDF9 /* MapViewController.swift in Sources */,
+				B36712302BD98EBC0013A2EE /* WeatherManager.swift in Sources */,
 				B3720B452BC5497A0005BDF9 /* AppDelegate.swift in Sources */,
 				B3720B702BD6ED620005BDF9 /* ProfileViewController.swift in Sources */,
 				B3720B472BC5497A0005BDF9 /* SceneDelegate.swift in Sources */,
 				B3720B722BD6EFE90005BDF9 /* ImageViewController.swift in Sources */,
 				B3720B742BD6EFFD0005BDF9 /* ChatViewController.swift in Sources */,
 				B3720B652BC870F50005BDF9 /* MainViewController.swift in Sources */,
+				B367122E2BD98EA20013A2EE /* WeatherData.swift in Sources */,
+				B367122C2BD98E7F0013A2EE /* WeatherModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
