@@ -9,6 +9,7 @@ import UIKit
 import SnapKit
 
 class TabBarController: UITabBarController {
+    let profileVC = ProfileViewController()
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.hidesBackButton = true
@@ -24,11 +25,11 @@ class TabBarController: UITabBarController {
             tabBar.scrollEdgeAppearance = appearance
         }
         
+        initialize()
         
-        
-        let profileVC = ProfileViewController()
-        profileVC.view.backgroundColor = .systemBackground
-        profileVC.tabBarItem = UITabBarItem(title: "Профиль", image:UIImage(systemName: "person.crop.circle") , tag: 0)
+        let toDoVC = ToDoViewController()
+        toDoVC.view.backgroundColor = .systemBackground
+        toDoVC.tabBarItem = UITabBarItem(title: "Дела", image: UIImage(systemName: "square.stack"), tag: 0)
         
         let photoVC = ImageViewController()
         photoVC.view.backgroundColor = .systemBackground
@@ -46,14 +47,38 @@ class TabBarController: UITabBarController {
         weatherVC.view.backgroundColor = .systemBackground
         weatherVC.tabBarItem = UITabBarItem(title: "Погода", image: UIImage(systemName: "sun.min"), tag: 4)
         
-//        let toDoVC = WeatherViewController()
-//        toDoVC.view.backgroundColor = .systemBackground
-//        toDoVC.tabBarItem = UITabBarItem(title: "Дела", image: UIImage(systemName: "square.stack"), tag: 5)
-        
-        self.viewControllers = [profileVC, photoVC, chatVC, mapsVC, weatherVC]
+        self.viewControllers = [toDoVC, photoVC, chatVC, mapsVC, weatherVC]
     }
 }
+// MARK: - UpButtons
 
+extension TabBarController {
+    
+    func initialize() {
+        navigationItem.leftBarButtonItems = initializeLeftButtonItems()
+        navigationItem.rightBarButtonItems = initializeRightButtonItems()
+    }
+    
+    func initializeLeftButtonItems() -> [UIBarButtonItem]{
+        let addProfileBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "person.crop.circle"), style: .plain, target: self, action: #selector(didTapProfileItem))
+        addProfileBarButtonItem.tintColor = .black
+        return [addProfileBarButtonItem]
+    }
+    
+    func initializeRightButtonItems() -> [UIBarButtonItem]{
+        let addSettingsBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "gearshape.fill"), style: .plain, target: self, action: #selector(didTapSettingsItem))
+        addSettingsBarButtonItem.tintColor = .black
+        return [addSettingsBarButtonItem]
+    }
+    
+    @objc func didTapSettingsItem() {
+        print("Settings button taped")
+    }
+    
+    @objc func didTapProfileItem() {
+        navigationController?.pushViewController(profileVC, animated: true)
+    }
+}
 
 //#Preview(traits: .portrait) {
 //    MainViewController()

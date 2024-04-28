@@ -24,6 +24,7 @@
 		B3720B722BD6EFE90005BDF9 /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3720B712BD6EFE90005BDF9 /* ImageViewController.swift */; };
 		B3720B742BD6EFFD0005BDF9 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3720B732BD6EFFD0005BDF9 /* ChatViewController.swift */; };
 		B3720B762BD6F00C0005BDF9 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3720B752BD6F00C0005BDF9 /* MapViewController.swift */; };
+		B3DC93062BDEA0E50091B786 /* ToDoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DC93052BDEA0E50091B786 /* ToDoViewController.swift */; };
 		F2EF5D5E6A74C3B3A435EA0E /* Pods_FoodGolik.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9CBE6CAD0479445B071FAF8 /* Pods_FoodGolik.framework */; };
 /* End PBXBuildFile section */
 
@@ -49,6 +50,7 @@
 		B3720B712BD6EFE90005BDF9 /* ImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
 		B3720B732BD6EFFD0005BDF9 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		B3720B752BD6F00C0005BDF9 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		B3DC93052BDEA0E50091B786 /* ToDoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoViewController.swift; sourceTree = "<group>"; };
 		B9CBE6CAD0479445B071FAF8 /* Pods_FoodGolik.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FoodGolik.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -93,6 +95,7 @@
 		B3720B432BC5497A0005BDF9 /* FoodGolik */ = {
 			isa = PBXGroup;
 			children = (
+				B3DC93042BDEA0AD0091B786 /* ToDo */,
 				B3720B682BD058220005BDF9 /* Constants */,
 				B3720B772BD6F0210005BDF9 /* Welcome */,
 				B3720B782BD6F0360005BDF9 /* Main */,
@@ -193,6 +196,14 @@
 				B3720B752BD6F00C0005BDF9 /* MapViewController.swift */,
 			);
 			path = Map;
+			sourceTree = "<group>";
+		};
+		B3DC93042BDEA0AD0091B786 /* ToDo */ = {
+			isa = PBXGroup;
+			children = (
+				B3DC93052BDEA0E50091B786 /* ToDoViewController.swift */,
+			);
+			path = ToDo;
 			sourceTree = "<group>";
 		};
 		C4961D8A7D51FA2E1FE64904 /* Pods */ = {
@@ -330,6 +341,7 @@
 				B3720B762BD6F00C0005BDF9 /* MapViewController.swift in Sources */,
 				B36712302BD98EBC0013A2EE /* WeatherManager.swift in Sources */,
 				B3720B452BC5497A0005BDF9 /* AppDelegate.swift in Sources */,
+				B3DC93062BDEA0E50091B786 /* ToDoViewController.swift in Sources */,
 				B3720B702BD6ED620005BDF9 /* ProfileViewController.swift in Sources */,
 				B3720B472BC5497A0005BDF9 /* SceneDelegate.swift in Sources */,
 				B3720B722BD6EFE90005BDF9 /* ImageViewController.swift in Sources */,

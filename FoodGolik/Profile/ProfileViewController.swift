@@ -22,6 +22,7 @@ class ProfileViewController: UIViewController {
         setupLayout()
         setupAppearance()
         setupData()
+        setupRightBarButton()
 
     }
 
@@ -80,6 +81,7 @@ extension ProfileViewController {
 extension ProfileViewController {
     func setupAppearance() {
         topBackgroundView.backgroundColor = UIColor(red: 101/255, green: 166/255, blue: 170/255, alpha: 1)
+        view.backgroundColor = .systemBackground
         
         photoImage.image = .aleksandr
         photoImage.layer.borderWidth = 4
@@ -99,6 +101,11 @@ extension ProfileViewController {
         
         descriptionLabel.textAlignment = .justified
         descriptionLabel.numberOfLines = 0
+        
+        navigationController?.navigationBar.tintColor = .black
+        navigationItem.title = "Профиль"
+        navigationItem.titleView?.sizeToFit()
+        
 
     }
 }
@@ -109,6 +116,24 @@ extension ProfileViewController {
         nameLabel.text = "Aleksandr Novikov"
         mailLabel.text = "A.Novikov@gmail.com"
         descriptionLabel.text = "A.Novikov@gmail.comA.Novikov@gmail.comA.Novikov@gmail.comA.Novikov@gmail.comA.Novikov@gmail.comvvA.Novikov@gmail.comA.Novikov@gmail.comA.Novikov@gmail.comA.Novikov@gmail.comvA.Novikov@gmail.comA.Novikov@gmail.comvvvvvA.Novikov@gmail.comA.Novikov@gmail.com"
+    }
+}
+
+// MARK: - Top Right Bar Button
+
+extension ProfileViewController {
+    func setupRightBarButton() {
+        navigationItem.rightBarButtonItem = initializeRightButtonItems()
+        
+        func initializeRightButtonItems() -> UIBarButtonItem{
+            let addCorrectBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "square.and.pencil"), style: .plain, target: self, action: #selector(didTapSettingsItem))
+            addCorrectBarButtonItem.tintColor = .black
+            return addCorrectBarButtonItem
+        }
+        
+    }
+    @objc func didTapSettingsItem() {
+        print("Correct button taped")
     }
 }
 
