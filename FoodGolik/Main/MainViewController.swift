@@ -12,15 +12,11 @@ class TabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.hidesBackButton = true
+        
         // Создаем внешний вид для таб бара
         let appearance = UITabBarAppearance()
         appearance.configureWithOpaqueBackground()
         appearance.backgroundColor = UIColor(red: 237/255, green: 237/255, blue: 237/255, alpha: 1)
-        
-        // Можно задать любой UIColor
-        
-        // Если вы хотите использовать изображение в качестве фона:
-        // appearance.backgroundImage = UIImage(named: "your_image_name")
         
         // Применяем созданный внешний вид к текущему таб бару
         tabBar.standardAppearance = appearance
@@ -46,11 +42,15 @@ class TabBarController: UITabBarController {
         mapsVC.view.backgroundColor = .systemBackground
         mapsVC.tabBarItem = UITabBarItem(title: "Карты", image:UIImage(systemName: "map"), tag: 3)
         
-        let toDoVC = WeatherViewController()
-        toDoVC.view.backgroundColor = .systemBackground
-        toDoVC.tabBarItem = UITabBarItem(title: "Погода", image: UIImage(systemName: "sun.min"), tag: 4)
+        let weatherVC = WeatherViewController()
+        weatherVC.view.backgroundColor = .systemBackground
+        weatherVC.tabBarItem = UITabBarItem(title: "Погода", image: UIImage(systemName: "sun.min"), tag: 4)
         
-        self.viewControllers = [profileVC, photoVC, chatVC, mapsVC, toDoVC]
+//        let toDoVC = WeatherViewController()
+//        toDoVC.view.backgroundColor = .systemBackground
+//        toDoVC.tabBarItem = UITabBarItem(title: "Дела", image: UIImage(systemName: "square.stack"), tag: 5)
+        
+        self.viewControllers = [profileVC, photoVC, chatVC, mapsVC, weatherVC]
     }
 }
 

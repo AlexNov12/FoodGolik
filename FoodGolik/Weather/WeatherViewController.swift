@@ -41,9 +41,6 @@ class WeatherViewController: UIViewController {
     }
 }
 
-#Preview(traits: .portrait) {
-    WeatherViewController()
-}
 
 // MARK: - Embed Views
 extension WeatherViewController {
@@ -249,4 +246,8 @@ extension WeatherViewController: CLLocationManagerDelegate{
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print(error)
     }
+}
+
+#Preview(traits: .portrait) {
+    WeatherViewController()
 }

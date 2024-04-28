@@ -8,12 +8,110 @@
 import UIKit
 
 class ProfileViewController: UIViewController {
+    
+    private let topBackgroundView = UIView()
+    private let photoImage = UIImageView()
+    private let nameLabel = UILabel()
+    private let mailLabel = UILabel()
+    private let descritpionView = UIView()
+    private let descriptionLabel = UILabel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        embedViews()
+        setupLayout()
+        setupAppearance()
+        setupData()
 
-        view.backgroundColor = .blue
-        print("ProfileViewController loaded")
     }
 
+}
+
+// MARK: - Embed View
+extension ProfileViewController {
+    func embedViews() {
+        
+        let arrayOfViews = [topBackgroundView, photoImage, nameLabel, mailLabel, descritpionView]
+        arrayOfViews.forEach { view.addSubview($0) }
+        
+        view.addSubview(descriptionLabel)
+    }
+}
+
+// MARK: - Setup Layouts
+extension ProfileViewController {
+    func setupLayout() {
+        topBackgroundView.snp.makeConstraints { make in
+            make.top.left.right.equalToSuperview()
+            make.height.equalTo(245)
+        }
+        
+        photoImage.snp.makeConstraints{ make in
+            make.size.equalTo(200)
+            make.top.equalTo(view.snp.top).offset(145)
+            make.centerX.equalToSuperview()
+        }
+        
+        nameLabel.snp.makeConstraints { make in
+            make.top.equalTo(photoImage.snp.bottom).offset(20)
+            make.height.equalTo(36)
+            make.centerX.equalToSuperview()
+        }
+        
+        mailLabel.snp.makeConstraints { make in
+            make.top.equalTo(nameLabel.snp.bottom).offset(20)
+            make.height.equalTo(19)
+            make.centerX.equalToSuperview()
+        }
+        
+        descritpionView.snp.makeConstraints { make in
+            make.left.right.equalToSuperview().inset(20)
+            make.top.equalTo(mailLabel.snp.bottom).offset(30)
+            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-20)
+        }
+        
+        descriptionLabel.snp.makeConstraints { make in
+            make.top.left.right.bottom.equalTo(descritpionView).inset(10)
+        }
+    }
+}
+
+// MARK: - Setup Appearance
+extension ProfileViewController {
+    func setupAppearance() {
+        topBackgroundView.backgroundColor = UIColor(red: 101/255, green: 166/255, blue: 170/255, alpha: 1)
+        
+        photoImage.image = .aleksandr
+        photoImage.layer.borderWidth = 4
+        photoImage.layer.masksToBounds = false
+        photoImage.layer.borderColor = UIColor.white.cgColor
+        photoImage.layer.cornerRadius = 100
+        photoImage.clipsToBounds = true
+        
+        nameLabel.textAlignment = .center
+        nameLabel.font = .systemFont(ofSize: 30, weight: .semibold)
+        
+        mailLabel.textAlignment = .center
+        mailLabel.font = .systemFont(ofSize: 18, weight: .semibold)
+        
+        descritpionView.backgroundColor = UIColor(red: 237/255, green: 237/255, blue: 237/255, alpha: 1)
+        descritpionView.layer.cornerRadius = 10
+        
+        descriptionLabel.textAlignment = .justified
+        descriptionLabel.numberOfLines = 0
+
+    }
+}
+
+// MARK: - Setup Data
+extension ProfileViewController {
+    func setupData() {
+        nameLabel.text = "Aleksandr Novikov"
+        mailLabel.text = "A.Novikov@gmail.com"
+        descriptionLabel.text = "A.Novikov@gmail.comA.Novikov@gmail.comA.Novikov@gmail.comA.Novikov@gmail.comA.Novikov@gmail.comvvA.Novikov@gmail.comA.Novikov@gmail.comA.Novikov@gmail.comA.Novikov@gmail.comvA.Novikov@gmail.comA.Novikov@gmail.comvvvvvA.Novikov@gmail.comA.Novikov@gmail.com"
+    }
+}
+
+#Preview(traits: .portrait) {
+    ProfileViewController()
 }
