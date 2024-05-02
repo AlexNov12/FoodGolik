@@ -11,10 +11,10 @@ class ProfileViewController: UIViewController {
     
     private let topBackgroundView = UIView()
     private let photoImage = UIImageView()
-    private let nameLabel = UILabel()
-    private let mailLabel = UILabel()
-    private let descritpionView = UIView()
-    private let descriptionLabel = UILabel()
+    fileprivate let nameLabel = UITextField()
+    fileprivate let mailLabel = UITextField()
+    private let descritpionView = UITextField()
+    private let descriptionLabel = UITextField()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -92,15 +92,17 @@ extension ProfileViewController {
         
         nameLabel.textAlignment = .center
         nameLabel.font = .systemFont(ofSize: 30, weight: .semibold)
+        nameLabel.isEnabled = false
         
         mailLabel.textAlignment = .center
         mailLabel.font = .systemFont(ofSize: 18, weight: .semibold)
+        mailLabel.isEnabled = false
         
         descritpionView.backgroundColor = UIColor(red: 237/255, green: 237/255, blue: 237/255, alpha: 1)
         descritpionView.layer.cornerRadius = 10
         
         descriptionLabel.textAlignment = .justified
-        descriptionLabel.numberOfLines = 0
+        //descriptionLabel.numberOfLines = 0
         
         navigationController?.navigationBar.tintColor = .black
         navigationItem.title = "Профиль"
@@ -133,10 +135,11 @@ extension ProfileViewController {
         
     }
     @objc func didTapSettingsItem() {
-        print("Correct button taped")
+        let correctProfileVC = CorrectProfileViewController()
+        present(correctProfileVC, animated: true)
     }
 }
 
-#Preview(traits: .portrait) {
-    ProfileViewController()
-}
+//#Preview(traits: .portrait) {
+//    ProfileViewController()
+//}
