@@ -102,6 +102,11 @@ extension CorrectProfileViewController {
             
         }
         
+        saveButton.snp.makeConstraints { make in
+            make.trailing.equalTo(view.snp.trailing).offset(-10)
+            make.top.equalTo(view.snp.top).offset(50)
+        }
+        
         
     }
 }
@@ -144,6 +149,18 @@ extension CorrectProfileViewController {
         descriptionTextField.font = .systemFont(ofSize: 18, weight: .semibold)
         descriptionTextField.isEditable = true
         descriptionTextField.tintColor = .black
+        
+        saveButton.setTitle("Сохранить", for: .normal)
+        saveButton.setTitleColor(.white, for: .normal)
+        saveButton.backgroundColor = .darkGray
+        saveButton.layer.cornerRadius = 16
+        saveButton.addTarget(self, action: #selector(succedRegistration), for: .touchUpInside)
+    }
+    
+    @objc func succedRegistration() {
+        UserDefaults.standard.set(nameTextField.text, forKey: "Name")
+        UserDefaults.standard.set(emailTextField.text, forKey: "Email")
+        UserDefaults.standard.set(descriptionTextField.text, forKey: "Description")
     }
 }
 
@@ -156,7 +173,6 @@ extension CorrectProfileViewController {
         emailTextField.placeholder = "Введите новый адрес эл. почты"
         descriptionLabel.text = "Описание"
         descriptionTextField.text = "Введите новое описание"
-        
     }
 }
 

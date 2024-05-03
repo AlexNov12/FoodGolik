@@ -23,7 +23,10 @@ class ProfileViewController: UIViewController {
         setupAppearance()
         setupData()
         setupRightBarButton()
-
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        setupData()
     }
 
 }
@@ -115,9 +118,17 @@ extension ProfileViewController {
 // MARK: - Setup Data
 extension ProfileViewController {
     func setupData() {
-        nameLabel.text = "Aleksandr Novikov"
-        mailLabel.text = "A.Novikov@gmail.com"
-        descriptionLabel.text = "A.Novikov@gmail.comA.Novikov@gmail.comA.Novikov@gmail.comA.Novikov@gmail.comA.Novikov@gmail.comvvA.Novikov@gmail.comA.Novikov@gmail.comA.Novikov@gmail.comA.Novikov@gmail.comvA.Novikov@gmail.comA.Novikov@gmail.comvvvvvA.Novikov@gmail.comA.Novikov@gmail.com"
+        if let name = UserDefaults.standard.string(forKey: "Name") {
+            nameLabel.text = name
+        }
+        
+        if let email = UserDefaults.standard.string(forKey: "Email") {
+            mailLabel.text = email
+        }
+        
+        if let description = UserDefaults.standard.string(forKey: "Email") {
+            descriptionLabel.text = description
+        }
     }
 }
 
