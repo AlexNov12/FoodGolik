@@ -126,7 +126,7 @@ extension ProfileViewController {
             mailLabel.text = email
         }
         
-        if let description = UserDefaults.standard.string(forKey: "Email") {
+        if let description = UserDefaults.standard.string(forKey: "Description") {
             descriptionLabel.text = description
         }
     }
@@ -147,7 +147,7 @@ extension ProfileViewController {
     }
     @objc func didTapSettingsItem() {
         let correctProfileVC = CorrectProfileViewController()
-        present(correctProfileVC, animated: true)
+        self.navigationController?.pushViewController(correctProfileVC, animated: true)
     }
 }
 

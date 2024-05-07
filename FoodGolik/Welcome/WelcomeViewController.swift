@@ -104,11 +104,13 @@ extension WelcomeViewController {
         mainViewLoginButton.backgroundColor = .darkGray
         mainViewLoginButton.layer.cornerRadius = 16
         mainViewLoginButton.addTarget(self, action: #selector(succedLogin), for: .touchUpInside)
+        mainViewLoginButton.setTitleColor(.gray , for: .highlighted)
         
         mainViewRegisterButton.setTitleColor(.white, for: .normal)
         mainViewRegisterButton.backgroundColor = .darkGray
         mainViewRegisterButton.layer.cornerRadius = 16
         mainViewRegisterButton.addTarget(self, action: #selector(succedRegistration), for: .touchUpInside)
+        mainViewRegisterButton.setTitleColor(.gray , for: .highlighted)
         
         
         emailTextField.placeholder = "Электронная почта"

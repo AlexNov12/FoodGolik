@@ -31,18 +31,18 @@ class CorrectProfileViewController: UIViewController {
         setupLayout()
         setupAppearance()
         setupData()
-        
     }
 }
 
 // MARK: - Embed View
 extension CorrectProfileViewController {
     func embedView() {
-        let arrayOfElmenets = [nameLabel, nameView, emailLabel, descriptionLabel, emailView, descriptionView, saveButton]
+        let arrayOfElmenets = [nameLabel, nameView, emailLabel, descriptionLabel, emailView, descriptionView]
         arrayOfElmenets.forEach {view.addSubview($0)}
         nameView.addSubview(nameTextField)
         emailView.addSubview(emailTextField)
         descriptionView.addSubview(descriptionTextField)
+        view.addSubview(saveButton)
         
     }
 }
@@ -51,7 +51,7 @@ extension CorrectProfileViewController {
 extension CorrectProfileViewController {
     func setupLayout() {
         nameLabel.snp.makeConstraints { make in
-            make.top.equalTo(view.snp.top).offset(50)
+            make.top.equalTo(view.snp.top).offset(100)
             make.leading.equalTo(view.snp.leading).offset(50)
             make.height.equalTo(20)
         }
@@ -103,11 +103,9 @@ extension CorrectProfileViewController {
         }
         
         saveButton.snp.makeConstraints { make in
-            make.trailing.equalTo(view.snp.trailing).offset(-10)
-            make.top.equalTo(view.snp.top).offset(50)
+            make.centerX.equalToSuperview()
+            make.top.equalTo(descriptionTextField.snp.bottom).offset(50)
         }
-        
-        
     }
 }
 
@@ -151,16 +149,18 @@ extension CorrectProfileViewController {
         descriptionTextField.tintColor = .black
         
         saveButton.setTitle("Сохранить", for: .normal)
-        saveButton.setTitleColor(.white, for: .normal)
-        saveButton.backgroundColor = .darkGray
+        saveButton.setTitleColor(.darkGray, for: .highlighted)
+        saveButton.backgroundColor = .systemGray
         saveButton.layer.cornerRadius = 16
-        saveButton.addTarget(self, action: #selector(succedRegistration), for: .touchUpInside)
+        saveButton.isEnabled = true
+        saveButton.addTarget(self, action: #selector(saveNewData), for: .touchUpInside)
     }
     
-    @objc func succedRegistration() {
+    @objc func saveNewData() {
         UserDefaults.standard.set(nameTextField.text, forKey: "Name")
         UserDefaults.standard.set(emailTextField.text, forKey: "Email")
         UserDefaults.standard.set(descriptionTextField.text, forKey: "Description")
+        print("data updated")
     }
 }
 
