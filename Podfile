@@ -8,4 +8,5 @@ target 'FoodGolik' do
     pod 'FirebaseAuth'
     pod 'FirebaseFirestore'
     pod 'SnapKit', '~> 5.7.0'
+    pod 'SwipeCellKit'
 end
