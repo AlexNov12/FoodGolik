@@ -9,4 +9,5 @@ target 'FoodGolik' do
     pod 'FirebaseFirestore'
     pod 'SnapKit', '~> 5.7.0'
     pod 'SwipeCellKit'
+    pod 'RealmSwift', '~>10'
 end
