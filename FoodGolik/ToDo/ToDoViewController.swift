@@ -8,6 +8,7 @@
 import UIKit
 import SwipeCellKit
 import RealmSwift
+import SnapKit
 
 class ToDoViewController: UIViewController {
     
@@ -157,7 +158,7 @@ extension ToDoViewController: SwipeTableViewCellDelegate {
     }
 }
 
-// MARK: - SetupLayout
+// MARK: - Save and reload methods
 extension ToDoViewController {
     func save(item: Item) {
         do {

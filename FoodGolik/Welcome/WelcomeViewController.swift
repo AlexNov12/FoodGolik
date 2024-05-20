@@ -166,6 +166,11 @@ extension WelcomeViewController {
                     self.showRegistrationAlert()
                     print(e.localizedDescription)
                 } else {
+                    let userId = authResult?.user.uid
+                    let email = email
+                    let data: [String: Any] = ["email":email]
+                    Firestore.firestore().collection("users").document(userId!).setData(data)
+                    
                     let nextVC = TabBarController()
                     self.navigationController?.pushViewController(nextVC, animated: true)
                 }

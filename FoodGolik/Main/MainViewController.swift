@@ -35,11 +35,11 @@ class TabBarController: UITabBarController {
         photoVC.view.backgroundColor = .systemBackground
         photoVC.tabBarItem = UITabBarItem(title: "Картинки", image:UIImage(systemName: "photo") , tag: 1)
         
-        let chatVC = UIViewController()
+        let chatVC = ChatViewController()
         chatVC.view.backgroundColor = .systemBackground
         chatVC.tabBarItem = UITabBarItem(title: "Чат", image:UIImage(systemName: "message"), tag: 2)
         
-        let mapsVC = UIViewController()
+        let mapsVC = MapViewController()
         mapsVC.view.backgroundColor = .systemBackground
         mapsVC.tabBarItem = UITabBarItem(title: "Карты", image:UIImage(systemName: "map"), tag: 3)
         
