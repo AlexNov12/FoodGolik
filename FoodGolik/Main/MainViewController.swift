@@ -35,7 +35,7 @@ class TabBarController: UITabBarController {
         photoVC.view.backgroundColor = .systemBackground
         photoVC.tabBarItem = UITabBarItem(title: "Картинки", image:UIImage(systemName: "photo") , tag: 1)
         
-        let chatVC = ChatViewController()
+        let chatVC = UsersViewController()
         chatVC.view.backgroundColor = .systemBackground
         chatVC.tabBarItem = UITabBarItem(title: "Чат", image:UIImage(systemName: "message"), tag: 2)
         

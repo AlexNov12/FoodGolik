@@ -2,93 +2,70 @@
 //  ChatViewController.swift
 //  FoodGolik
 //
-//  Created by Александр Новиков on 22.04.2024.
+//  Created by Александр Новиков on 20.05.2024.
 //
 
 import UIKit
-import FirebaseCore
-import FirebaseAuth
-import FirebaseFirestore
+import MessageKit
+import InputBarAccessoryView
 
-class ChatViewController: UIViewController {
+struct Sender: SenderType {
+    var senderId: String
+    var displayName: String
+}
+
+
+struct Message: MessageType{
+    var sender: MessageKit.SenderType
+    var messageId: String
+    var sentDate: Date
+    var kind: MessageKit.MessageKind
+}
+
+class ChatViewController: MessagesViewController {
     
-    private let tableView: UITableView = .init(frame: .zero, style: .plain)
-    var users = [String]()
-
+    var chatID: String?
+    let selfSender = Sender(senderId: "1", displayName: "Me")
+    let otherSender = Sender(senderId: "2", displayName: "Johnye")
+    
+    var messages = [Message]()
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.dataSource = self
-        tableView.delegate = self
-        setupLayout()
-        setupAppearance()
-        getAllUsers()
         
-    }
-}
-
-// MARK: - SetupLayout
-extension ChatViewController {
-    func setupLayout() {
-        view.addSubview(tableView)
+        messages.append(Message(sender: selfSender, messageId: "1", sentDate: Date().addingTimeInterval(-11200), kind: .text("Hello")))
+        messages.append(Message(sender: otherSender, messageId: "2", sentDate: Date().addingTimeInterval(-10200), kind: .text("Hello! All is good!")))
+        messages.append(Message(sender: otherSender, messageId: "2", sentDate: Date().addingTimeInterval(-90200), kind: .text("And you?")))
         
-        tableView.snp.makeConstraints { make in
-            make.leading.trailing.top.bottom.equalToSuperview()
-        }
+        messagesCollectionView.messagesDataSource = self
+        messagesCollectionView.messagesLayoutDelegate = self
+        messagesCollectionView.messagesDisplayDelegate = self
+        messageInputBar.delegate = self
+        showMessageTimestampOnSwipeLeft = true
     }
 }
 
-// MARK: - SetupAppearance
-extension ChatViewController {
-    func setupAppearance() {
-        tableView.backgroundColor = .clear
-        tableView.separatorStyle = .none
-        
-        tableView.register(UINib(nibName: "UserCellTableViewCell", bundle: nil), forCellReuseIdentifier: UserCellTableViewCell.reuseId)
+
+// MARK: - Delegates for VC and Delegate protocol
+extension ChatViewController: MessagesDisplayDelegate, MessagesLayoutDelegate, MessagesDataSource {
+    func currentSender() -> MessageKit.SenderType {
+        return selfSender
+    }
+
+    func numberOfSections(in messagesCollectionView: MessagesCollectionView) -> Int {
+        return messages.count
+    }
+
+    func messageForItem(at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> MessageType {
+        return messages[indexPath.section]
     }
 }
 
-// MARK: - Datasource and Delegate protocol
-extension ChatViewController: UITableViewDataSource, UITableViewDelegate {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return users.count // ?? 1
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: UserCellTableViewCell.reuseId, for: indexPath) as! UserCellTableViewCell
-        cell.selectionStyle = .none
-        let cellName = users[indexPath.row]
-        cell.configCell(cellName)
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        100.0
-    }
-}
-
-// MARK: - Get data from Firebase
-extension ChatViewController {
-    func getAllUsers() {
-        Firestore.firestore().collection("users").getDocuments { snap, err in
-            if let err = err {
-                print("Error getting documents: \(err)")
-                return
-            }
-
-            var emailList = [String]()
-            if let docs = snap?.documents {
-                for doc in docs {
-                    let data = doc.data()
-                    if let email = data["email"] as? String {
-                        emailList.append(email)
-                    }
-                }
-            }
-            
-            DispatchQueue.main.async {
-                self.users = emailList
-                self.tableView.reloadData()
-            }
-        }
+// MARK: - InputBarAccessoryViewDelegate
+extension ChatViewController: InputBarAccessoryViewDelegate {
+    func inputBar(_ inputBar: InputBarAccessoryView, didPressSendButtonWith text: String) {
+        messages.append(Message(sender: selfSender, messageId: "1234", sentDate: Date(), kind: .text(text)))
+        inputBar.inputTextView.text = nil
+        messagesCollectionView.reloadData()
+        messagesCollectionView.scrollToLastItem(animated: true)
     }
 }

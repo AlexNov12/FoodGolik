@@ -10,4 +10,5 @@ target 'FoodGolik' do
     pod 'SnapKit', '~> 5.7.0'
     pod 'SwipeCellKit'
     pod 'RealmSwift', '~>10'
+    pod 'MessageKit'
 end
