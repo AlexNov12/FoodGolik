@@ -56,7 +56,6 @@ extension MessageListViewController: UITableViewDataSource, UITableViewDelegate 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = ChatViewController()
         vc.chatID = "123123"
-        print("Check")
         navigationController?.pushViewController(vc, animated: true)
     }
     

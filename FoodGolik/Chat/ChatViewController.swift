@@ -37,10 +37,6 @@ class ChatViewController: MessagesViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        messages.append(Message(sender: selfSender, messageId: "1", sentDate: Date().addingTimeInterval(-11200), kind: .text("Hello")))
-        messages.append(Message(sender: otherSender, messageId: "2", sentDate: Date().addingTimeInterval(-10200), kind: .text("Hello! All is good!")))
-        messages.append(Message(sender: otherSender, messageId: "2", sentDate: Date().addingTimeInterval(-90200), kind: .text("And you?")))
-        
         messagesCollectionView.messagesDataSource = self
         messagesCollectionView.messagesLayoutDelegate = self
         messagesCollectionView.messagesDisplayDelegate = self
@@ -68,10 +64,10 @@ extension ChatViewController: MessagesDisplayDelegate, MessagesLayoutDelegate, M
 // MARK: - InputBarAccessoryViewDelegate
 extension ChatViewController: InputBarAccessoryViewDelegate {
     func inputBar(_ inputBar: InputBarAccessoryView, didPressSendButtonWith text: String) {
-        let msg = Message(sender: selfSender, messageId: "1234", sentDate: Date(), kind: .text(text))
+        let msg = Message(sender: selfSender, messageId: "", sentDate: Date(), kind: .text(text))
         messages.append(msg)
-        service.sendMessage(otherId: self.otherId, convoId: self.chatID, message: msg, text: text) {
-            [weak self] isSend in // Вопрос, что такое "isSend", но мб это имя замыкания у нас тут будеь
+        service.sendMessage(otherId: self.otherId, convoId: self.chatID, text: text) {
+            [weak self] isSend in // Вопрос, что такое "isSend", но мб это имя замыкания у нас тут будет
             
             DispatchQueue.main.async {
                 inputBar.inputTextView.text = nil
@@ -88,20 +84,48 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
 
 // MARK: - Messanger
 class Service{
-    func sendMessage(otherId: String?, convoId: String?, message: Message, text: String, completion: @escaping (Bool) -> ()) {
-        if convoId == nil {
-            // create new convo
-        } else {
-            let msg:[String: Any] = [
-                "date": Date(),
-                "sender": message.sender.senderId,
-                "text": text
-            ]
-            Firestore.firestore().collection("conversations").document(convoId!).collection("messages").addDocument(data: msg) { err in
-                if err == nil {
-                    completion(true)
-                } else {
-                    completion(false)
+    func sendMessage(otherId: String?, convoId: String?, text: String, completion: @escaping (Bool) -> ()) {
+        let ref = Firestore.firestore()
+        if let uid = Auth.auth().currentUser?.uid {
+            if convoId == nil {
+                // create new convo
+                let convoId = UUID().uuidString
+                
+                let selfData:[String:Any] = [
+                    "date": Date(),
+                    "otherId":otherId!
+                ]
+                
+                let otherData:[String:Any] = [
+                    "date": Date(),
+                    "otherId":uid
+                ]
+                //  у нас есть переписка с человеком Х
+                ref.collection("users")
+                    .document(uid)
+                    .collection("conversations")
+                    .document(convoId)
+                    .setData(selfData)
+                
+                //  у человека Х есть переписка с нами
+                ref.collection("users")
+                    .document(otherId!)
+                    .collection("conversations")
+                    .document(convoId)
+                    .setData(otherData)
+                
+            } else {
+                let msg:[String: Any] = [
+                    "date": Date(),
+                    "sender": uid,
+                    "text": text
+                ]
+                ref.collection("conversations").document(convoId!).collection("messages").addDocument(data: msg) { err in
+                    if err == nil {
+                        completion(true)
+                    } else {
+                        completion(false)
+                    }
                 }
             }
         }

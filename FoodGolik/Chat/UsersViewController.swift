@@ -13,7 +13,7 @@ import FirebaseFirestore
 class UsersViewController: UIViewController {
     
     private let tableView: UITableView = .init(frame: .zero, style: .plain)
-    var users = [String]()
+    var users = [CurentUser]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,7 +57,7 @@ extension UsersViewController: UITableViewDataSource, UITableViewDelegate {
         let cell = tableView.dequeueReusableCell(withIdentifier: UserCellTableViewCell.reuseId, for: indexPath) as! UserCellTableViewCell
         cell.selectionStyle = .none
         let cellName = users[indexPath.row]
-        cell.configCell(cellName)
+        cell.configCell(cellName.email)
         return cell
     }
     
@@ -66,9 +66,10 @@ extension UsersViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let userId = users[indexPath.row].id
         let vc = ChatViewController()
-        vc.chatID = "fistChatId"
-        vc.otherId = "mLe6HOiZdYTKQCDJNHRvDXvEKy63"
+        vc.otherId = userId
+        vc.chatID = "fistChatId" // Что с этим делать и откуда будем тянуть пока вопрос
         navigationController?.pushViewController(vc, animated: true)
     }
 }
@@ -76,27 +77,31 @@ extension UsersViewController: UITableViewDataSource, UITableViewDelegate {
 // MARK: - Get data from Firebase
 extension UsersViewController {
     func getAllUsers() {
-        Firestore.firestore().collection("users").getDocuments { snap, err in
+        // Чтобы себя не выводил в списке чатов
+        guard let email = Auth.auth().currentUser?.email else {return}
+        Firestore.firestore().collection("users")
+        .whereField("email", isNotEqualTo: email)
+        .getDocuments { snap, err in
             if let err = err {
                 print("Error getting documents: \(err)")
                 return
             }
 
-            var emailList = [String]()
+            var currentUsers = [CurentUser]()
             if let docs = snap?.documents {
                 for doc in docs {
                     let data = doc.data()
+                    let userId = doc.documentID
                     if let email = data["email"] as? String {
-                        emailList.append(email)
+                        currentUsers.append(CurentUser(id: userId, email: email))
                     }
                 }
             }
             
             DispatchQueue.main.async {
-                self.users = emailList
+                self.users = currentUsers
                 self.tableView.reloadData()
             }
         }
     }
 }
-
