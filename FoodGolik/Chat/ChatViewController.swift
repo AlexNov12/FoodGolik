@@ -42,6 +42,19 @@ class ChatViewController: MessagesViewController {
         messagesCollectionView.messagesDisplayDelegate = self
         messageInputBar.delegate = self
         showMessageTimestampOnSwipeLeft = true
+        
+        
+        
+        if chatID == nil {
+            service.getConvoId(otherId: otherId!) { [weak self] chatId in
+                self?.chatID = chatId
+                
+            }
+        }
+    }
+    
+    func getMessages(convoId: String) {
+        
     }
 }
 
@@ -51,11 +64,11 @@ extension ChatViewController: MessagesDisplayDelegate, MessagesLayoutDelegate, M
     func currentSender() -> MessageKit.SenderType {
         return selfSender
     }
-
+    
     func numberOfSections(in messagesCollectionView: MessagesCollectionView) -> Int {
         return messages.count
     }
-
+    
     func messageForItem(at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> MessageType {
         return messages[indexPath.section]
     }
@@ -67,16 +80,17 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
         let msg = Message(sender: selfSender, messageId: "", sentDate: Date(), kind: .text(text))
         messages.append(msg)
         service.sendMessage(otherId: self.otherId, convoId: self.chatID, text: text) {
-            [weak self] isSend in // Вопрос, что такое "isSend", но мб это имя замыкания у нас тут будет
+            [weak self] convoId in
             
             DispatchQueue.main.async {
                 inputBar.inputTextView.text = nil
                 self?.messagesCollectionView.reloadData()
                 self?.messagesCollectionView.scrollToLastItem(animated: true)
             }
+            self?.chatID = convoId
             
         }
-
+        
     }
 }
 
@@ -84,7 +98,7 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
 
 // MARK: - Messanger
 class Service{
-    func sendMessage(otherId: String?, convoId: String?, text: String, completion: @escaping (Bool) -> ()) {
+    func sendMessage(otherId: String?, convoId: String?, text: String, completion: @escaping (String) -> ()) {
         let ref = Firestore.firestore()
         if let uid = Auth.auth().currentUser?.uid {
             if convoId == nil {
@@ -114,6 +128,36 @@ class Service{
                     .document(convoId)
                     .setData(otherData)
                 
+                let msg:[String: Any] = [
+                    "date": Date(),
+                    "sender": uid,
+                    "text": text
+                ]
+                
+                let convoInfo:[String: Any] = [
+                    "date": Date(),
+                    "selfSender": uid,
+                    "otherSender": otherId!
+                ]
+                
+                ref.collection("conversations")
+                    .document(convoId)
+                    .setData(convoInfo) { err in
+                        if let err = err{
+                            print(err.localizedDescription)
+                            return
+                        }
+                        ref.collection("conversations")
+                            .document(convoId)
+                            .collection("messages")
+                            .addDocument(data:msg) { err in
+                                if err == nil {
+                                    completion(convoId)
+                                }
+                            }
+                    }
+                
+                
             } else {
                 let msg:[String: Any] = [
                     "date": Date(),
@@ -122,9 +166,7 @@ class Service{
                 ]
                 ref.collection("conversations").document(convoId!).collection("messages").addDocument(data: msg) { err in
                     if err == nil {
-                        completion(true)
-                    } else {
-                        completion(false)
+                        completion(convoId!)
                     }
                 }
             }
@@ -135,16 +177,55 @@ class Service{
         
     }
     
-    func getConvoId() {
-        
+    func getConvoId(otherId: String, completion: @escaping (String) ->() ) {
+        if let uid = Auth.auth().currentUser?.uid{
+            let ref = Firestore.firestore()
+            ref.collection("users")
+                .document(uid)
+                .collection("conversations")
+                .whereField("otherId", isEqualTo: otherId)
+                .getDocuments { snap, err in
+                    if err != nil {
+                        return
+                    }
+                    if let snap = snap, !snap.documents.isEmpty {
+                        let doc = snap.documents.first
+                        if let convoId = doc?.documentID{
+                            completion(convoId)
+                        }
+                    }
+                }
+        }
     }
     
-    func getAllMessages() {
-        
+    func getAllMessages(chatId: String) {
+        if let uid = Auth.auth().currentUser?.uid{
+            var msgs = [Message]()
+            let ref = Firestore.firestore()
+            ref.collection("conversations")
+                .document(chatId)
+                .collection("messages")
+                .limit(to: 50)
+                .order(by: "date",descending: true)
+                .addSnapshotListener { snap, err in
+                    if err != nil {
+                        return
+                    }
+                    if let snap = snap, !snap.documents.isEmpty {
+                        var sender = Sender(senderId: uid, displayName: "Me")
+                        for doc in snap.documents{
+                            let data = doc.data()
+                            let userId = data["sender"] as! String
+                            let messageId = doc.documentID
+                            let date = data["date"] as! Timestamp
+                            let sendDate = date.dateValue()
+                        }
+                    }
+                }
+        }
     }
     
     func getOneMessage() {
         
     }
 }
-

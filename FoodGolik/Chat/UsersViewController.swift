@@ -69,7 +69,7 @@ extension UsersViewController: UITableViewDataSource, UITableViewDelegate {
         let userId = users[indexPath.row].id
         let vc = ChatViewController()
         vc.otherId = userId
-        vc.chatID = "fistChatId" // Что с этим делать и откуда будем тянуть пока вопрос
+        //vc.chatID = "fistChatId" // Что с этим делать и откуда будем тянуть пока вопрос
         navigationController?.pushViewController(vc, animated: true)
     }
 }
@@ -105,3 +105,4 @@ extension UsersViewController {
         }
     }
 }
+
