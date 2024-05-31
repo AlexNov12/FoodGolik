@@ -30,8 +30,8 @@ class ChatViewController: MessagesViewController {
     var chatID: String?
     var otherId: String?
     let service = Service() // Может и не нужно, если мы класс service посадим в этот VC
-    let selfSender = Sender(senderId: "1", displayName: "Me")
-    let otherSender = Sender(senderId: "2", displayName: "Johnye")
+    let selfSender = Sender(senderId: "1", displayName: "")
+    let otherSender = Sender(senderId: "2", displayName: "")
     
     var messages = [Message]()
     override func viewDidLoad() {
@@ -48,13 +48,18 @@ class ChatViewController: MessagesViewController {
         if chatID == nil {
             service.getConvoId(otherId: otherId!) { [weak self] chatId in
                 self?.chatID = chatId
-                
+                self?.getMessages(convoId: chatId)
             }
         }
+        
     }
     
     func getMessages(convoId: String) {
-        
+        service.getAllMessages(chatId: convoId) { [weak self] messages in
+            self?.messages = messages
+            self?.messagesCollectionView.reloadData()
+            self?.messagesCollectionView.scrollToLastItem(animated: true)
+        }
     }
 }
 
@@ -198,28 +203,39 @@ class Service{
         }
     }
     
-    func getAllMessages(chatId: String) {
+    func getAllMessages(chatId: String, completion: @escaping ([Message])->()) {
         if let uid = Auth.auth().currentUser?.uid{
-            var msgs = [Message]()
             let ref = Firestore.firestore()
             ref.collection("conversations")
                 .document(chatId)
                 .collection("messages")
                 .limit(to: 50)
-                .order(by: "date",descending: true)
+                .order(by: "date",descending: false)
                 .addSnapshotListener { snap, err in
                     if err != nil {
                         return
                     }
                     if let snap = snap, !snap.documents.isEmpty {
+                        var msgs = [Message]()
                         var sender = Sender(senderId: uid, displayName: "Me")
                         for doc in snap.documents{
                             let data = doc.data()
                             let userId = data["sender"] as! String
                             let messageId = doc.documentID
                             let date = data["date"] as! Timestamp
-                            let sendDate = date.dateValue()
+                            let sentDate = date.dateValue()
+                            let text = data["text"] as! String
+                            
+                            if userId == uid{
+                                sender = Sender(senderId: "1", displayName: "")
+                            } else {
+                                sender = Sender(senderId: "2", displayName: "")
+                            }
+                            
+                            msgs.append(Message(sender: sender, messageId: messageId, sentDate: sentDate, kind: .text(text)))
                         }
+                        
+                        completion(msgs)
                     }
                 }
         }
