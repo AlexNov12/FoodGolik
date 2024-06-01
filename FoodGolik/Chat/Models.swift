@@ -11,3 +11,6 @@ struct CurentUser{
     var id: String
     var email: String
 }
+enum keywordFirebase {
+    
+}

@@ -11,4 +11,5 @@ target 'FoodGolik' do
     pod 'SwipeCellKit'
     pod 'RealmSwift', '~>10'
     pod 'MessageKit'
+    pod 'YandexMapsMobile', '4.6.1-lite'
 end
